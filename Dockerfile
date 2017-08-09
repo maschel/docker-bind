@@ -7,4 +7,4 @@ FROM ubuntu
 MAINTAINER Geoffrey Mastenbroek
 
 # update repository and install packages
-RUN apt-get update && apt-get install bind9 bind9utils bind9-doc
+RUN apt-get update && apt-get install -y bind9 bind9utils bind9-doc
