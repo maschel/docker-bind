@@ -29,6 +29,8 @@ create_bind_data_dir() {
 create_pid_dir() {
 	mkdir -m 0755 -p /var/run/named
 	chown root:${BIND_USER} /var/run/named
+	# Set PID location in bind config
+	sed -i '/options {/ a\\\tpid-file "/var/named/named.pid"' /data/bind/etc/named.conf.options
 }
 
 create_bind_cache_dir() {
