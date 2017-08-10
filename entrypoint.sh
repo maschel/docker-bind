@@ -17,7 +17,8 @@ create_bind_data_dir() {
 	chown -R ${BIND_USER}:${BIND_USER} ${BIND_DATA_DIR}
 
 	# Set BIND PID and key dir 
-	sed -i '/options {/ a\	directory "/var/run/named";' /data/bind/etc/named.conf.options
+	sed -i '/options {/ a\	pid-file "/var/run/named/named.pid";' /data/bind/etc/named.conf.options
+	sed -i '/options {/ a\	key-directory /var/key/bind;' /data/bind/etc/named.conf.options
 
 	# Copy lib files
 	if [ ! -d ${BIND_DATA_DIR}/lib ]; then
@@ -39,8 +40,14 @@ create_bind_cache_dir() {
 	chown root:${BIND_USER} /var/cache/bind
 }
 
+create_bind_key_dir() {
+	mkdir -m 0755 -p /var/key/bind
+	chown root:${BIND_USER} /var/key/bind
+}
+
 # Prepare bind environment
 create_pid_dir
+create_bind_key_dir
 create_bind_data_dir
 create_bind_cache_dir
 
