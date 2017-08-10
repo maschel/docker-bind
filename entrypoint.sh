@@ -15,6 +15,8 @@ create_bind_data_dir() {
 	ln -sf ${BIND_DATA_DIR}/etc /etc/bind
 	chmod -R 0755 ${BIND_DATA_DIR}
 	chown -R ${BIND_USER}:${BIND_USER} ${BIND_DATA_DIR}
+	# Set PID location in bind config
+	sed -i '/options {/ a\\\tpid-file "/var/named/named.pid"' /data/bind/etc/named.conf.options
 
 	# Copy lib files
 	if [ ! -d ${BIND_DATA_DIR}/lib ]; then
@@ -29,8 +31,6 @@ create_bind_data_dir() {
 create_pid_dir() {
 	mkdir -m 0755 -p /var/run/named
 	chown root:${BIND_USER} /var/run/named
-	# Set PID location in bind config
-	sed -i '/options {/ a\\\tpid-file "/var/named/named.pid"' /data/bind/etc/named.conf.options
 }
 
 create_bind_cache_dir() {
