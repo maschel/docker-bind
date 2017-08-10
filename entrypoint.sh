@@ -18,7 +18,7 @@ create_bind_data_dir() {
 
 	# Set BIND PID and key dir 
 	sed -i '/options {/ a\	pid-file "/var/run/named/named.pid";' /data/bind/etc/named.conf.options
-	sed -i '/options {/ a\	key-directory /var/key/bind;' /data/bind/etc/named.conf.options
+	sed -i '/options {/ a\	key-directory "/var/key/bind";' /data/bind/etc/named.conf.options
 
 	# Copy lib files
 	if [ ! -d ${BIND_DATA_DIR}/lib ]; then
