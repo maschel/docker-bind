@@ -31,17 +31,17 @@ create_bind_data_dir() {
 }
 
 create_pid_dir() {
-	mkdir -m 0755 -p /var/run/named
+	mkdir -m 0775 -p /var/run/named
 	chown root:${BIND_USER} /var/run/named
 }
 
 create_bind_cache_dir() {
-	mkdir -m 0755 -p /var/cache/bind
+	mkdir -m 0775 -p /var/cache/bind
 	chown root:${BIND_USER} /var/cache/bind
 }
 
 create_bind_key_dir() {
-	mkdir -m 0755 -p /var/key/bind
+	mkdir -m 0775 -p /var/key/bind
 	chown root:${BIND_USER} /var/key/bind
 }
 
