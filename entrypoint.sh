@@ -16,7 +16,7 @@ create_bind_data_dir() {
 	chmod -R 0755 ${BIND_DATA_DIR}
 	chown -R ${BIND_USER}:${BIND_USER} ${BIND_DATA_DIR}
 
-	$ Copy lib files
+	# Copy lib files
 	if [ ! -d ${BIND_DATA_DIR}/lib ]; then
 		mkdir -p ${BIND_DATA_DIR}/lib
 		chown ${BIND_USER}:${BIND_USER} ${BIND_DATA_DIR}/lib
