@@ -3,7 +3,7 @@ version: '2'
 services:
   bind:
     restart: always
-    image: maschel/bind:9.10.3-20170811
+    image: bind:9.10.3-20170811
     ports:
     - "53:53/udp"
     - "53:53/tcp"
