@@ -6,19 +6,19 @@ BIND_DATA_DIR=${DATA_DIR}/bind
 create_bind_data_dir() {
 	mkdir -p ${BIND_DATA_DIR}
 
-	# Copy etc files
+	# Copy default config files (if none existing) and set default parameters
 	if [ ! -d ${BIND_DATA_DIR}/etc ]; then
 		mv /etc/bind ${BIND_DATA_DIR}/etc
+
+		# Set BIND PID and key dir 
+		sed -i '/options {/ a\	pid-file "/var/run/named/named.pid";' ${BIND_DATA_DIR}/etc/named.conf.options
+		sed -i '/options {/ a\	key-directory "/var/key/bind";' ${BIND_DATA_DIR}/etc/named.conf.options
 	fi
 	# Remove old location and create symlink
 	rm -rf /etc/bind
 	ln -sf ${BIND_DATA_DIR}/etc /etc/bind
 	chmod -R 0755 ${BIND_DATA_DIR}
 	chown -R ${BIND_USER}:${BIND_USER} ${BIND_DATA_DIR}
-
-	# Set BIND PID and key dir 
-	sed -i '/options {/ a\	pid-file "/var/run/named/named.pid";' /data/bind/etc/named.conf.options
-	sed -i '/options {/ a\	key-directory "/var/key/bind";' /data/bind/etc/named.conf.options
 
 	# Copy lib files
 	if [ ! -d ${BIND_DATA_DIR}/lib ]; then
