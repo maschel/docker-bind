@@ -17,7 +17,7 @@ create_bind_data_dir() {
 	# Remove old location and create symlink
 	rm -rf /etc/bind
 	ln -sf ${BIND_DATA_DIR}/etc /etc/bind
-	chmod -R 0755 ${BIND_DATA_DIR}
+	chmod -R 0775 ${BIND_DATA_DIR}
 	chown -R ${BIND_USER}:${BIND_USER} ${BIND_DATA_DIR}
 
 	# Copy lib files
