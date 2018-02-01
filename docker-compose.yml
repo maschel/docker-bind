@@ -2,7 +2,7 @@ version: "3"
 
 services:
   bind:
-    image: maschel/bind:9.10.3-20180128
+    image: maschel/bind:latest
     restart: unless-stopped
     container_name: bind
     ports:
@@ -12,4 +12,3 @@ services:
     hostname: ns1
     volumes:
       - /srv/docker/bind:/data/bind
-      - /dev/urandom:/dev/random

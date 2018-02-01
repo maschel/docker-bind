@@ -1,20 +1,17 @@
 # Dockerfile to run BIND DNS server container
-# Based on Ubuntu Image
-# Maschel ICT, Geoffrey Mastenbroek, 2017
+# Based on Alpine Image
+# Maschel ICT, Geoffrey Mastenbroek, 2018
 
-# Use Ubuntu as base image
-FROM ubuntu:xenial
+# Use Alpine as base image
+FROM alpine:latest
 MAINTAINER Geoffrey Mastenbroek
 
 # Set environment variables
-ENV BIND_VERSION=1:9.10.3 \
-    BIND_USER=bind \
+ENV BIND_USER=named \
     DATA_DIR=/data
 
-# Update repository and install packages
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y bind9=${BIND_VERSION}* bind9-host=${BIND_VERSION}* dnsutils \
- && rm -rf /var/lib/apt/lists/*
+# Install apk's (cache disabled)
+RUN apk --no-cache add bind bind-tools
 
 # Copy entrypoint script
 COPY entrypoint.sh /sbin/entrypoint.sh
