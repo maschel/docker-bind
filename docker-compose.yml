@@ -2,11 +2,14 @@ version: "3"
 
 services:
   bind:
-    image: maschel/bind:9.10.3-20170812
+    image: maschel/bind:9.10.3-20180128
     restart: unless-stopped
     container_name: bind
     ports:
     - "53:53/udp"
     - "53:53/tcp"
+    domainname: example.com
+    hostname: ns1
     volumes:
-    - /srv/docker/bind:/data/bind
+      - /srv/docker/bind:/data/bind
+      - /dev/urandom:/dev/random
