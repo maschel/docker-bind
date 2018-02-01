@@ -10,7 +10,7 @@ create_bind_data_dir() {
 	if [ ! -d ${BIND_DATA_DIR}/etc ]; then
 		mv /etc/bind ${BIND_DATA_DIR}/etc
 		chown -R ${BIND_USER}:${BIND_USER} ${BIND_DATA_DIR}/etc
-		chmod -R o+X ${BIND_DATA_DIR}/etc
+		chmod -R o+rX ${BIND_DATA_DIR}/etc
 
 		# Enable recursive DNS by default and listen on all interfaces
 		mv ${BIND_DATA_DIR}/etc/named.conf.recursive ${BIND_DATA_DIR}/etc/named.conf
@@ -26,7 +26,7 @@ create_bind_data_dir() {
 	if [ ! -d ${BIND_DATA_DIR}/var ]; then
 		mv /var/bind ${BIND_DATA_DIR}/var
 		chown -R ${BIND_USER}:${BIND_USER} ${BIND_DATA_DIR}/var
-		chmod -R o+X ${BIND_DATA_DIR}/var
+		chmod -R o+rX ${BIND_DATA_DIR}/var
 	fi
 	# Remove old location and create symlink
 	rm -rf /var/bind
